@@ -1,0 +1,219 @@
+/* Fonts */
+
+@import 'https://fonts.googleapis.com/css?family=Roboto&subset=cyrillic,cyrillic-ext,latin-ext';
+
+
+/* Variables */
+
+:root {
+    --background-blue: #3877E6;
+    --background-light-blue: #4A90E2;
+    --background-light-grey: #F6F6F6;
+    --text-dark-grey: #333333;
+    --text-white: #FFFFFF;
+    --text-light-grey: #DCDCDC;
+}
+
+
+/* Main */
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    height: 100%;
+}
+
+body {
+    margin: 0;
+    display: flex;
+    font-family: 'Roboto', sans-serif;
+    font-size: 100%;
+}
+
+
+/* I/O */
+
+.message {
+    display: block;
+    resize: none;
+    width: 50%;
+    height: 100%;
+    padding: 100px;
+    outline: none;
+    border: none;
+    font-family: 'Roboto', sans-serif;
+    font-size: 1em;
+    line-height: 1.8;
+}
+
+.message.-input {
+    background: var(--background-blue);
+    color: var(--text-white);
+}
+
+.message.-output {
+    background: var(--background-light-grey);
+    color: var(--text-dark-grey);
+} 
+
+.caption {
+    position: absolute;
+    top: 50px;
+    transform: translate(-50%, -50%);
+    font-size: 1.2em;
+}
+
+.caption.-input {
+    left: 25%;
+    color: var(--text-white);
+}
+
+.caption.-output {
+    left: 75%;
+    color: var(--text-dark-grey);
+}
+
+
+/* Settings */
+
+@keyframes button-to-blackout {
+    from {
+        width: 50px;
+        height: 50px;
+        background: var(--background-light-blue);
+    }
+    to {
+        width: 150vw;
+        height: 150vw;
+        background: rgba(0, 0, 0, .7);
+    }
+}
+
+@keyframes blackout-to-button {
+    from {
+        width: 150vw;
+        height: 150vw;
+        background: rgba(0, 0, 0, .7);
+        box-shadow: 0 0 0 black;
+    }
+    to {
+        width: 50px;
+        height: 50px;
+        background: var(--background-light-blue);
+        box-shadow: 0 0 0 black;
+    }
+}
+
+.settings-button {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: var(--background-light-blue);
+    box-shadow: 0 5px 10px rgba(0, 0, 0, .5);
+    cursor: pointer;
+}
+
+.settings-button.-blackout {
+    width: 150vw;
+    height: 150vw;
+    background: rgba(0, 0, 0, .7);
+    box-shadow: 0 0 0 black;
+    cursor: auto;
+}
+
+.settings-button > .icon {
+    position: relative;
+    top: 50%;
+    transform: translateY(-70%);
+    text-align: center;
+    font-size: 40px;
+    color: var(--text-white);
+}
+
+.settings-button.-blackout > .icon {
+    display: none;
+}
+
+.settings-form {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    width: max-content;
+    height: max-content;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+    opacity: 0;
+
+    --items-height: 40px;
+
+    transition: top .6s, opacity .6s;
+}
+
+.settings-form.-visible {
+    pointer-events: all;
+    opacity: 1;
+}
+
+
+/* Settings form */
+
+.settings-form > .shift {
+    display: inline-block;
+    width: 50px;
+    height: 40px;
+    line-height: 40px;
+    padding: 0;
+    text-align: center;
+    font-size: 1em;
+    color: var(--text-white);
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid var(--background-light-grey);
+    outline: none;
+}
+
+.settings-form > .direction-button {
+    display: inline-block;
+    margin: 0 15px;
+    color: var(--text-light-grey);
+    cursor: pointer;
+    transition: all .3s;
+}
+
+.settings-form > .direction-button:hover {
+    color: var(--text-white);
+}
+
+.settings-form > .direction-button::before {
+    content: "";
+    position: absolute;
+    display: block;
+    margin: 0;
+    width: 20px;
+    height: 20px;
+    border-top: 1px solid var(--text-light-grey);
+    border-right: 1px solid var(--text-light-grey);
+}
+
+.settings-form > .direction-button:hover::before {
+    border-color: var(--text-white);
+}
+
+.settings-form > .direction-button.-negative::before {
+    left: -5px;
+    transform: rotate(-135deg);
+}
+
+.settings-form > .direction-button.-positive::before {
+    right: 5px;
+    transform: translateX(50%) rotate(45deg);
+}
